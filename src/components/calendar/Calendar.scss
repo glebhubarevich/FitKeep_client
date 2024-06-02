@@ -1,0 +1,54 @@
+.calendar {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+	font-size: 14px;
+	text-align: center;
+	overflow-x: scroll;
+
+	.header,
+	.row {
+		display: table-row;
+		background: var(--white);
+	}
+
+	.header > div,
+	.row > .cell,
+	.row > .date {
+		display: table-cell;
+		padding: 1rem;
+	}
+
+	.header > div {
+		font-weight: bold;
+		background-color: #f4f4f4;
+	}
+
+	.row:hover {
+		background-color: #f4f4f4;
+	}
+
+	.row > .date {
+		font-weight: bold;
+	}
+
+	.row:nth-child(even) {
+		// background-color: #f9f9f9;
+	}
+
+	.cell {
+		font-size: 18px;
+	}
+
+	.row {
+		cursor: pointer;
+	}
+
+	.today {
+		border-left: 4px solid var(--primary);
+		background-color: var(
+			--primary-light
+		) !important; /* Highlight today's row */
+	}
+}

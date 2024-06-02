@@ -1,0 +1,38 @@
+select.select {
+	border: none;
+	padding: 1rem 2rem;
+}
+
+.shadow {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+	border-radius: 5px;
+}
+
+button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 2rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	&.btn_primary {
+		background-color: var(--primary);
+		color: var(--white);
+	}
+	&.btn_secondary {
+		background-color: var(--medium-gray);
+		color: var(--white);
+	}
+	&:not(.active):hover {
+		filter: contrast(1.3) brightness(1.1);
+		transition: all 0.2s ease;
+	}
+	&.active {
+		cursor: default;
+	}
+}
