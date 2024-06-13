@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
-import './global.scss';
+import './styles/global.scss';
 
 //Provider und Store für Redux
 import {Provider} from 'react-redux';

@@ -20,6 +20,14 @@ export const getTraining = createAsyncThunk(
 	}
 );
 
+export const getTrainingsByDate = createAsyncThunk(
+	'trainings/getTrainingsByDate',
+	async (date) => {
+		const response = await axios.get(`${API_URL}/api/trainings/date/${date}`);
+		return response.data;
+	}
+);
+
 export const addTraining = createAsyncThunk(
 	'trainings/addTraining',
 	async (formData) => {
@@ -92,6 +100,17 @@ const trainingSlice = createSlice({
 				state.loading = false;
 			})
 			.addCase(getTraining.rejected, (state, action) => {
+				state.error = action.error.message;
+				state.loading = false;
+			})
+			.addCase(getTrainingsByDate.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(getTrainingsByDate.fulfilled, (state, action) => {
+				state.trainings = action.payload;
+				state.loading = false;
+			})
+			.addCase(getTrainingsByDate.rejected, (state, action) => {
 				state.error = action.error.message;
 				state.loading = false;
 			})

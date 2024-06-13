@@ -11,15 +11,23 @@ export const getExercises = createAsyncThunk(
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
 		}
-		const response = await axios.get(`${API_URL}/api/exercises`);
+		const response = await axios
+			.get(`${API_URL}/api/exercises`)
+			.catch((err) => {
+				console.log(err);
+			});
 		return response.data;
 	}
 );
 
 export const getExercise = createAsyncThunk(
 	'exercises/getExercise',
-	async (id) => {
-		const response = await axios.get(`${API_URL}/api/exercises/${id}`);
+	async (exercise) => {
+		const response = await axios
+			.get(`${API_URL}/api/exercises/${exercise._id}`)
+			.catch((err) => {
+				console.log(err);
+			});
 		return response.data;
 	}
 );
@@ -27,7 +35,11 @@ export const getExercise = createAsyncThunk(
 export const addExercise = createAsyncThunk(
 	'exercises/addExercise',
 	async (formData) => {
-		const response = await axios.post(`${API_URL}/api/exercises`, formData);
+		const response = await axios
+			.post(`${API_URL}/api/exercises`, formData)
+			.catch((err) => {
+				console.log(err);
+			});
 		return response.data;
 	}
 );
@@ -35,10 +47,11 @@ export const addExercise = createAsyncThunk(
 export const updateExercise = createAsyncThunk(
 	'exercises/updateExercise',
 	async ({id, formData}) => {
-		const response = await axios.patch(
-			`${API_URL}/api/exercises/${id}`,
-			formData
-		);
+		const response = await axios
+			.patch(`${API_URL}/api/exercises/${id}`, formData)
+			.catch((err) => {
+				console.log(err);
+			});
 		return response.data;
 	}
 );
@@ -46,7 +59,9 @@ export const updateExercise = createAsyncThunk(
 export const deleteExercise = createAsyncThunk(
 	'exercises/deleteExercise',
 	async (id) => {
-		await axios.delete(`${API_URL}/api/exercises/${id}`);
+		await axios.delete(`${API_URL}/api/exercises/${id}`).catch((err) => {
+			console.log(err);
+		});
 		return id;
 	}
 );

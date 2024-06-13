@@ -2,15 +2,24 @@
 	display: table;
 	width: 100%;
 	border-collapse: collapse;
-	margin: 20px 0;
 	font-size: 14px;
 	text-align: center;
-	overflow-x: scroll;
+	overflow: hidden;
+	border-radius: var(--border-radius);
+	// max-width: 1000px;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		// margin-top: 3rem;
+	}
 
 	.header,
 	.row {
 		display: table-row;
 		background: var(--white);
+		width: 100%;
 	}
 
 	.header > div,
@@ -18,6 +27,7 @@
 	.row > .date {
 		display: table-cell;
 		padding: 1rem;
+		text-align: center;
 	}
 
 	.header > div {
@@ -31,22 +41,21 @@
 
 	.row > .date {
 		font-weight: bold;
-	}
-
-	.row:nth-child(even) {
-		// background-color: #f9f9f9;
+		vertical-align: middle;
 	}
 
 	.cell {
 		font-size: 18px;
+		vertical-align: middle;
 	}
 
 	.row {
 		cursor: pointer;
+		height: 50px;
 	}
 
 	.today {
-		border-left: 4px solid var(--primary);
+		// outline-left: 4px solid var(--primary);
 		background-color: var(
 			--primary-light
 		) !important; /* Highlight today's row */

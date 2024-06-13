@@ -19,7 +19,7 @@ const LoginForm = () => {
 	}
 
 	return (
-		<div className=''>
+		<div className='page'>
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label>Email:</label>

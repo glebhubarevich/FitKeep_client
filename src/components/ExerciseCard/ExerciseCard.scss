@@ -1,0 +1,33 @@
+.exercise-card {
+	border: 1px solid var(--medium-gray);
+	cursor: pointer;
+	overflow: hidden;
+	height: 60px;
+	width: 200px;
+}
+
+.exercise-card.selected {
+	border-color: var(--primary);
+	background-color: var(--primary-light);
+}
+
+.exercise-card img {
+	width: 60px;
+	height: 100%;
+	object-fit: cover;
+}
+
+.exercise-details {
+}
+
+.exercise-details h4 {
+	margin: 0;
+	font-size: 16px;
+	height: 100%;
+}
+
+.exercise-details p {
+	margin: 5px 0 0;
+	font-size: 14px;
+	color: #666;
+}

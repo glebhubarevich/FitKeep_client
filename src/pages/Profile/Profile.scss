@@ -1,0 +1,21 @@
+.profile {
+	&__container {
+		background: var(--white);
+		gap: 2rem;
+		margin-top: 3rem;
+		width: 100%;
+		height: 100%;
+		padding: 2rem;
+	}
+	&__image {
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		&_img {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+}

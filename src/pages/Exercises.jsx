@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getExercises, deleteExercise} from '../redux/reducers/exerciseReducer';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const ExerciseList = () => {
 	const dispatch = useDispatch();
@@ -12,11 +13,10 @@ const ExerciseList = () => {
 	}, [dispatch]);
 
 	if (loading) {
-		return <p>Loading...</p>;
+		return <LoadingSpinner />;
 	}
-	console.log(exercises);
 	return (
-		<div>
+		<div className='page'>
 			<h1>Exercises</h1>
 			<ul>
 				{exercises &&

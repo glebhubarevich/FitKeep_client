@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
 		};
 		profileImage =
 			profileImage ||
-			`https://avatar.iran.liara.run/username?username=${name.replace(
+			`https://api.dicebear.com/8.x/initials/svg?backgroundType=gradientLinear&seed=${name.replace(
 				/ /g,
 				'+'
 			)}`;

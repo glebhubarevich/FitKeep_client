@@ -17,10 +17,10 @@ import {
 	addMonths,
 	subMonths,
 	isSameDay,
-	parse,
 } from 'date-fns';
 import './Calendar.scss';
 import CalendarControls from '../calendarControls/CalendarControls';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const Calendar = () => {
 	const {trainings, loading, error} = useSelector((state) => state.trainings);
@@ -43,17 +43,26 @@ const Calendar = () => {
 	}, [dispatch]);
 
 	const handleRowClick = (date) => {
-		navigate(`/trainings/${date}`);
+		navigate(`/trainings/day/${format(date, 'dd-MM-yyyy')}`);
 	};
 
-	const getSummary = (exercises, category) => {
+	const getSummary = (trainings, category) => {
 		let foundInCategory = false;
-		exercises.forEach((exercise) => {
-			if (exercise.category === category) {
-				foundInCategory = true;
-			}
+		trainings.forEach((training) => {
+			training.exercises.forEach((exercise) => {
+				if (exercise.category === category) {
+					foundInCategory = true;
+				}
+			});
 		});
-		return foundInCategory ? <Check size={18} /> : null;
+		const isInFuture = new Date(trainings[0]?.date) > new Date();
+		return foundInCategory ? (
+			!isInFuture ? (
+				<Check size={18} />
+			) : (
+				<Flag size={18} />
+			)
+		) : null;
 	};
 
 	const handleViewChange = (event) => {
@@ -80,11 +89,11 @@ const Calendar = () => {
 		? trainings.filter((entry) => {
 				const entryDate = entry.date;
 				if (view === 'month') {
-					return isSameMonth(entryDate, selectedDate);
+					return isSameMonth(new Date(entryDate), selectedDate);
 				} else {
 					const start = startOfWeek(selectedDate, {weekStartsOn: 1});
 					const end = endOfWeek(selectedDate, {weekStartsOn: 1});
-					return isWithinInterval(entryDate, {start, end});
+					return isWithinInterval(new Date(entryDate), {start, end});
 				}
 		  })
 		: [];
@@ -110,15 +119,17 @@ const Calendar = () => {
 					endOfWeek(selectedDate, {weekStartsOn: 1}),
 					'dd MMM yyyy'
 			  )}`;
+
 	if (loading) {
-		return <p>Loading...</p>;
+		return <LoadingSpinner />;
 	}
 
 	if (error) {
 		return <p>Error: {error}</p>;
 	}
+
 	return (
-		<div>
+		<div className='calendar__container'>
 			<CalendarControls
 				view={view}
 				handleViewChange={handleViewChange}
@@ -127,7 +138,7 @@ const Calendar = () => {
 				jumpToToday={jumpToToday}
 				currentPeriod={currentPeriod}
 			/>
-			<div className='calendar'>
+			<div className='calendar shadow'>
 				<div className='header'>
 					<div>Date</div>
 					{categories.map((category) => (
@@ -135,9 +146,9 @@ const Calendar = () => {
 					))}
 				</div>
 				{dates.map((date) => {
-					const entry = filteredData.find((d) => {
-						return isSameDay(new Date(d.date), new Date(date));
-					});
+					const dayTrainings = filteredData.filter((d) =>
+						isSameDay(new Date(d.date), new Date(date))
+					);
 					const isToday =
 						format(date, 'dd.MM.yyyy') ===
 						format(new Date(), 'dd.MM.yyyy');
@@ -145,13 +156,13 @@ const Calendar = () => {
 						<div
 							key={date}
 							className={`row ${isToday ? 'today' : ''}`}
-							onClick={() => handleRowClick(format(date, 'dd.MM.yyyy'))}
+							onClick={() => handleRowClick(date)}
 						>
 							<div className='date'>{format(date, 'dd.MM.yyyy')}</div>
 							{categories.map((category) => (
 								<div key={category} className='cell'>
-									{entry
-										? getSummary(entry.exercises, category)
+									{dayTrainings.length > 0
+										? getSummary(dayTrainings, category)
 										: null}
 								</div>
 							))}
