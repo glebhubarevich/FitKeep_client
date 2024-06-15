@@ -12,13 +12,6 @@
 	-moz-osx-font-smoothing: grayscale;
 
 	/* Variablen für Farben */
-	--primary: #ec5151;
-	--primary-light: #fdeded;
-	--black: #000;
-	--white: #fff;
-	--dark-gray: #384249;
-	--medium-gray: #738797;
-	--light-gray: #f9f9f9;
 
 	--border-radius: 12px;
 }

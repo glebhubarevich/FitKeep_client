@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import './styles/global.scss';
+import './styles/typography.scss';
+import './styles/colors.scss';
+import './styles/alignments.scss';
 
 //Provider und Store für Redux
 import {Provider} from 'react-redux';
