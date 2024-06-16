@@ -7,8 +7,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/DatePicker.scss';
 import './TrainingForm.scss';
-import ExerciseCard from '../ExerciseCard/ExerciseCard';
-import SearchInput from '../SearchInput/SearchInput';
+import ExerciseCard from '../../components/ExerciseCard/ExerciseCard';
+import SearchInput from '../../components/SearchInput/SearchInput';
 
 const TrainingForm = () => {
 	const [description, setDescription] = useState('');

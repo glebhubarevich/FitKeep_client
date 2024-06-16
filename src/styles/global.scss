@@ -24,6 +24,7 @@ strong {
 	gap: 2rem;
 	height: 100%;
 	width: 100%;
+	margin-top: 3rem;
 }
 
 button,
@@ -59,12 +60,23 @@ button,
 			color: var(--dark-gray) !important;
 		}
 	}
+	&.btn_danger {
+		background-color: var(--primary-light);
+		color: var(--black);
+		&:hover {
+			background-color: var(--primary) !important;
+		}
+	}
 
 	&.active {
 		cursor: default;
 	}
 }
-
+.hover {
+	&:hover {
+		background-color: var(--light-gray);
+	}
+}
 .section-container {
 	background-color: var(--white);
 	width: 100%;
@@ -77,4 +89,7 @@ input {
 	border: 1px solid var(--medium-gray);
 	padding: 1rem;
 	border-radius: var(--border-radius);
+}
+main {
+	width: 100vw !important;
 }

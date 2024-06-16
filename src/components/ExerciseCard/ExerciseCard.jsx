@@ -16,7 +16,7 @@ const ExerciseCard = ({exercise, isSelected, onSelect}) => {
 			onClick={handleSelect}
 		>
 			{exercise.media && exercise.media[0] && (
-				<img src={exercise.media[0]} alt={exercise.name} />
+				<img src={`${exercise.media[0]}`} alt={exercise.name} />
 			)}
 			<div className='exercise-details p1 flex-column'>
 				<h4>{exercise.name}</h4>

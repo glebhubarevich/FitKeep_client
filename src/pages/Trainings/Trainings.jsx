@@ -4,6 +4,7 @@ import {getTrainings} from '../../redux/reducers/trainingReducer';
 import {Link} from 'react-router-dom';
 import TrainingCard from '../../components/TrainingCard/TrainingCard';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import {Plus} from 'phosphor-react';
 import './Trainings.scss';
 
 const groupTrainingsByDate = (trainings) => {
@@ -44,7 +45,7 @@ const Trainings = () => {
 			<div className='flex-row space-between'>
 				<h1>All Trainings</h1>
 				<Link to='./new' className='button btn_primary'>
-					New Training
+					<Plus size={16} weight='light' />
 				</Link>
 			</div>
 			<div className='training__container section-container flex-column gap3'>

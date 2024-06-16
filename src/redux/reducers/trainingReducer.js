@@ -4,49 +4,84 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
 
 // Async thunks
-export const getTrainings = createAsyncThunk('trainings/getTrainings', async () => {
-	const response = await axios.get(`${API_URL}/api/trainings`);
-	console.log(response.data);
-	return response.data;
-});
+export const getTrainings = createAsyncThunk(
+	'trainings/getTrainings',
+	async () => {
+		const response = await axios.get(`${API_URL}/api/trainings`);
+		return response.data;
+	}
+);
 
-export const getTraining = createAsyncThunk('trainings/getTraining', async (id) => {
-	const response = await axios.get(`${API_URL}/api/trainings/${id}`);
-	return response.data;
-});
+export const getTraining = createAsyncThunk(
+	'trainings/getTraining',
+	async (id) => {
+		const response = await axios.get(`${API_URL}/api/trainings/${id}`);
+		return response.data;
+	}
+);
 
-export const getTrainingsByDate = createAsyncThunk('trainings/getTrainingsByDate', async (date) => {
-	const response = await axios.get(`${API_URL}/api/trainings/date/${date}`);
-	return response.data;
-});
+export const getTrainingsByDate = createAsyncThunk(
+	'trainings/getTrainingsByDate',
+	async (date) => {
+		const response = await axios.get(`${API_URL}/api/trainings/date/${date}`);
+		return response.data;
+	}
+);
 
-export const addTraining = createAsyncThunk('trainings/addTraining', async (formData) => {
-	const config = {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	};
-	const response = await axios.post(`${API_URL}/api/trainings`, formData, config);
-	return response.data;
-});
-
-export const updateTraining = createAsyncThunk(
-	'trainings/updateTraining',
-	async ({id, formData}) => {
+export const addTraining = createAsyncThunk(
+	'trainings/addTraining',
+	async (formData) => {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
-		const response = await axios.patch(`${API_URL}/api/trainings/${id}`, formData, config);
+		const response = await axios.post(
+			`${API_URL}/api/trainings`,
+			formData,
+			config
+		);
 		return response.data;
 	}
 );
 
-export const deleteTraining = createAsyncThunk('trainings/deleteTraining', async (id) => {
-	await axios.delete(`${API_URL}/api/trainings/${id}`);
-	return id;
-});
+// export const updateTraining = createAsyncThunk(
+// 	'trainings/updateTraining',
+// 	async ({id, formData}) => {
+// 		const config = {
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 			},
+// 		};
+// 		const response = await axios.patch(`${API_URL}/api/trainings/${id}`, formData, config);
+// 		return response.data;
+// 	}
+// );
+export const updateTraining = createAsyncThunk(
+	'trainings/updateTraining',
+	async (training) => {
+		const {id, ...data} = training;
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		const response = await axios.patch(
+			`${API_URL}/api/trainings/${id}`,
+			data,
+			config
+		);
+		return response.data;
+	}
+);
+
+export const deleteTraining = createAsyncThunk(
+	'trainings/deleteTraining',
+	async (id) => {
+		await axios.delete(`${API_URL}/api/trainings/${id}`);
+		return id;
+	}
+);
 
 const trainingSlice = createSlice({
 	name: 'trainings',
@@ -108,7 +143,7 @@ const trainingSlice = createSlice({
 			})
 			.addCase(updateTraining.fulfilled, (state, action) => {
 				const index = state.trainings.findIndex(
-					(training) => training._id === action.payload._id
+					(t) => t._id === action.payload._id
 				);
 				state.trainings[index] = action.payload;
 				state.loading = false;
@@ -121,7 +156,9 @@ const trainingSlice = createSlice({
 				state.loading = true;
 			})
 			.addCase(deleteTraining.fulfilled, (state, action) => {
-				state.trainings = state.trainings.filter((training) => training._id !== action.payload);
+				state.trainings = state.trainings.filter(
+					(training) => training._id !== action.payload
+				);
 				state.loading = false;
 			})
 			.addCase(deleteTraining.rejected, (state, action) => {

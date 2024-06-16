@@ -6,3 +6,8 @@ main {
 	padding: 5rem 3rem;
 	width: 100%;
 }
+@media screen and (max-width: 768px) {
+	main {
+		padding: 5rem 1rem;
+	}
+}

@@ -18,8 +18,6 @@ export default function DayView() {
 		dispatch(getTrainingsByDate(format(date, 'yyyy-MM-dd')));
 	}, [dispatch, date]);
 
-	console.log(trainings);
-
 	if (loading) {
 		return <LoadingSpinner />;
 	}
@@ -39,7 +37,7 @@ export default function DayView() {
 						<Link
 							to={`/trainings/${training._id}`}
 							key={training._id}
-							className='flex-row space-between p1'
+							className='flex-row space-between p1 hover flex-center'
 						>
 							<div className='flex-column'>
 								<h2>{training.description}</h2>

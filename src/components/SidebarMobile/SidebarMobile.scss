@@ -1,13 +1,14 @@
-#sidebar {
+#sidebar-mobile {
 	height: 100vh;
-	position: sticky;
+	position: fixed;
 	top: 0;
 	left: 0;
 	justify-content: space-between;
 	align-self: start;
-	width: 250px;
+	width: 100vw;
 	padding-top: 5rem;
-	background: var(--white);
+	background: #ffffffe0;
+	backdrop-filter: blur(10px);
 	color: var(--dark-gray);
 	transition: all 0.3s;
 	z-index: 999;
@@ -40,14 +41,24 @@
 			}
 		}
 	}
-	// & .button {
-	// 	margin-left: 2rem;
-	// 	margin-right: 2rem;
-	// }
 }
-
-@media screen and (max-width: 768px) {
-	#sidebar {
+.sidebar-toggle {
+	position: fixed !important;
+	z-index: 1001;
+	top: 1rem;
+	left: 1rem;
+	padding: 1rem;
+	background: none !important;
+	& * {
+		color: var(--dark-gray);
+	}
+	fill: var(--dark-gray);
+}
+@media screen and (min-width: 769px) {
+	#sidebar-mobile {
 		display: none;
+	}
+	.sidebar-toggle {
+		display: none !important;
 	}
 }

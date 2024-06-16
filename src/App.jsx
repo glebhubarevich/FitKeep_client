@@ -6,14 +6,17 @@ import Trainings from './pages/Trainings/Trainings';
 import TrainingDetails from './pages/TrainingDetails/TrainingDetails';
 import Exercises from './pages/Exercises';
 import Sidebar from './components/sidebar/Sidebar';
+import SidebarMobile from './components/SidebarMobile/SidebarMobile';
 import LoginForm from './pages/LoginForm';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoute from './pages/ProtectedRoute';
 import RegisterForm from './pages/RegisterForm';
-import TrainingForm from './components/TrainingForm/TrainingForm';
+import TrainingForm from './pages/TrainingForm/TrainingForm';
+import EditTraining from './pages/EditTraining/EditTraining';
 import {loadUser} from './redux/reducers/authReducer';
 import './App.scss';
 import DayView from './pages/DayView/DayView';
+import NewExercise from './pages/NewExercise/NewExercise';
 
 function App() {
 	const dispatch = useDispatch();
@@ -26,6 +29,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			{isAuthenticated && <Sidebar />}
+			{isAuthenticated && <SidebarMobile />}
 			<main>
 				{!loading && (
 					<Routes>
@@ -73,8 +77,13 @@ function App() {
 						/>
 						<Route
 							path='/trainings/edit/:id'
-							element={<div>Edit Training</div>}
+							element={
+								<ProtectedRoute>
+									<EditTraining />
+								</ProtectedRoute>
+							}
 						/>
+						{/* Exercises */}
 						<Route path='/exercises/:id' element={<div>Exercise</div>} />
 						<Route
 							path='/profile'
@@ -88,6 +97,7 @@ function App() {
 							path='/exercises/edit/:id'
 							element={<div>Edit Exercise</div>}
 						/>
+						<Route path='/exercises/new' element={<NewExercise />} />
 						<Route path='/register' element={<RegisterForm />} />
 						<Route path='*' element={<div>404 - Not Found</div>} />
 					</Routes>

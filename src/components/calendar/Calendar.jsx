@@ -27,7 +27,15 @@ const Calendar = () => {
 	const [view, setView] = useState('week'); // 'month' or 'week'
 	const [selectedDate, setSelectedDate] = useState(new Date()); // default to today
 	const navigate = useNavigate();
-	const categories = ['Cardio', 'Biceps', 'Triceps', 'Back', 'Abs', 'Legs', 'Shoulders'];
+	const categories = [
+		'Cardio',
+		'Biceps',
+		'Triceps',
+		'Back',
+		'Abs',
+		'Legs',
+		'Shoulders',
+	];
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -48,7 +56,13 @@ const Calendar = () => {
 			});
 		});
 		const isInFuture = new Date(trainings[0]?.date) > new Date();
-		return foundInCategory ? !isInFuture ? <Check size={18} /> : <Flag size={18} /> : null;
+		return foundInCategory ? (
+			!isInFuture ? (
+				<Check size={18} />
+			) : (
+				<Flag size={18} />
+			)
+		) : null;
 	};
 
 	const handleViewChange = (event) => {
@@ -70,7 +84,6 @@ const Calendar = () => {
 	const jumpToToday = () => {
 		setSelectedDate(new Date());
 	};
-	console.log(trainings);
 	const filteredData = trainings
 		? trainings.filter((entry) => {
 				const entryDate = entry.date;
@@ -98,7 +111,10 @@ const Calendar = () => {
 	const currentPeriod =
 		view === 'month'
 			? format(selectedDate, 'MMMM yyyy')
-			: `${format(startOfWeek(selectedDate, {weekStartsOn: 1}), 'dd MMM')} - ${format(
+			: `${format(
+					startOfWeek(selectedDate, {weekStartsOn: 1}),
+					'dd MMM'
+			  )} - ${format(
 					endOfWeek(selectedDate, {weekStartsOn: 1}),
 					'dd MMM yyyy'
 			  )}`;
@@ -112,7 +128,7 @@ const Calendar = () => {
 	}
 
 	return (
-		<div className='calendar__container'>
+		<div>
 			<CalendarControls
 				view={view}
 				handleViewChange={handleViewChange}
@@ -121,33 +137,39 @@ const Calendar = () => {
 				jumpToToday={jumpToToday}
 				currentPeriod={currentPeriod}
 			/>
-			<div className='calendar shadow'>
-				<div className='header'>
-					<div>Date</div>
-					{categories.map((category) => (
-						<div key={category}>{category}</div>
-					))}
+			<div className='calendar__container'>
+				<div className='calendar shadow rounded'>
+					<div className='header'>
+						<div>Date</div>
+						{categories.map((category) => (
+							<div key={category}>{category}</div>
+						))}
+					</div>
+					{dates.map((date) => {
+						const dayTrainings = filteredData.filter((d) =>
+							isSameDay(new Date(d.date), new Date(date))
+						);
+						const isToday =
+							format(date, 'dd.MM.yyyy') ===
+							format(new Date(), 'dd.MM.yyyy');
+						return (
+							<div
+								key={date}
+								className={`row ${isToday ? 'today' : ''}`}
+								onClick={() => handleRowClick(date)}
+							>
+								<div className='date'>{format(date, 'dd.MM.yyyy')}</div>
+								{categories.map((category) => (
+									<div key={category} className='cell'>
+										{dayTrainings.length > 0
+											? getSummary(dayTrainings, category)
+											: null}
+									</div>
+								))}
+							</div>
+						);
+					})}
 				</div>
-				{dates.map((date) => {
-					const dayTrainings = filteredData.filter((d) =>
-						isSameDay(new Date(d.date), new Date(date))
-					);
-					const isToday = format(date, 'dd.MM.yyyy') === format(new Date(), 'dd.MM.yyyy');
-					return (
-						<div
-							key={date}
-							className={`row ${isToday ? 'today' : ''}`}
-							onClick={() => handleRowClick(date)}
-						>
-							<div className='date'>{format(date, 'dd.MM.yyyy')}</div>
-							{categories.map((category) => (
-								<div key={category} className='cell'>
-									{dayTrainings.length > 0 ? getSummary(dayTrainings, category) : null}
-								</div>
-							))}
-						</div>
-					);
-				})}
 			</div>
 		</div>
 	);

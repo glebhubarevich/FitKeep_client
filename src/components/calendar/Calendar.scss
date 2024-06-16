@@ -6,13 +6,11 @@
 	text-align: center;
 	overflow: hidden;
 	border-radius: var(--border-radius);
-	// max-width: 1000px;
 
 	&__container {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		// margin-top: 3rem;
 	}
 
 	.header,
@@ -59,5 +57,12 @@
 		background-color: var(
 			--primary-light
 		) !important; /* Highlight today's row */
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.calendar__container {
+		width: calc(100vw - 2rem);
+		overflow: scroll;
 	}
 }

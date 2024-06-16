@@ -34,12 +34,17 @@ export const getExercise = createAsyncThunk(
 
 export const addExercise = createAsyncThunk(
 	'exercises/addExercise',
-	async (formData) => {
-		const response = await axios
-			.post(`${API_URL}/api/exercises`, formData)
-			.catch((err) => {
-				console.log(err);
-			});
+	async (exercise) => {
+		const config = {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		};
+		const response = await axios.post(
+			`${API_URL}/api/exercises`,
+			exercise,
+			config
+		);
 		return response.data;
 	}
 );
