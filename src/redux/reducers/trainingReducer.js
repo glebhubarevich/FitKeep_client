@@ -45,18 +45,6 @@ export const addTraining = createAsyncThunk(
 	}
 );
 
-// export const updateTraining = createAsyncThunk(
-// 	'trainings/updateTraining',
-// 	async ({id, formData}) => {
-// 		const config = {
-// 			headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-// 		};
-// 		const response = await axios.patch(`${API_URL}/api/trainings/${id}`, formData, config);
-// 		return response.data;
-// 	}
-// );
 export const updateTraining = createAsyncThunk(
 	'trainings/updateTraining',
 	async (training) => {

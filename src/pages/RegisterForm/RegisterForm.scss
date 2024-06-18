@@ -1,0 +1,23 @@
+.register-form {
+	&.page {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+	}
+	& .section-container {
+		max-width: 600px;
+	}
+	&__input {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 5fr;
+		align-items: center;
+	}
+	& button,
+	& .button {
+		width: 100%;
+	}
+}

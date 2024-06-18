@@ -7,10 +7,10 @@ import TrainingDetails from './pages/TrainingDetails/TrainingDetails';
 import Exercises from './pages/Exercises';
 import Sidebar from './components/sidebar/Sidebar';
 import SidebarMobile from './components/SidebarMobile/SidebarMobile';
-import LoginForm from './pages/LoginForm';
+import LoginForm from './pages/LoginForm/LoginForm';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoute from './pages/ProtectedRoute';
-import RegisterForm from './pages/RegisterForm';
+import RegisterForm from './pages/RegisterForm/RegisterForm';
 import TrainingForm from './pages/TrainingForm/TrainingForm';
 import EditTraining from './pages/EditTraining/EditTraining';
 import {loadUser} from './redux/reducers/authReducer';
@@ -23,8 +23,8 @@ function App() {
 	const {isAuthenticated, loading} = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		dispatch(loadUser());
-	}, [dispatch]);
+		isAuthenticated && dispatch(loadUser());
+	}, [dispatch, isAuthenticated]);
 
 	return (
 		<BrowserRouter>

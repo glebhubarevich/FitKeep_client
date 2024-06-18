@@ -38,9 +38,7 @@ button,
 	cursor: pointer;
 	transition: all 0.2s ease;
 	height: fit-content;
-	// max-width: 300px;
 	&:not(.active):not(.primary):hover {
-		// filter: contrast(0.8);
 		background-color: var(--medium-gray);
 		color: var(--white);
 		transition: all 0.2s ease;
