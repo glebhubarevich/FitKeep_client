@@ -15,13 +15,15 @@ const RegisterForm = () => {
 	const {isAuthenticated, loading, error} = useSelector((state) => state.auth);
 
 	const handleSubmit = async (e) => {
-		console.log('formdata', name, email, password, img);
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append('name', name);
 		formData.append('email', email);
 		formData.append('password', password);
 		formData.append('profileImage', img);
+		for (let [key, value] of formData.entries()) {
+			console.log(`${key}: ${value}`);
+		}
 		await dispatch(register(formData));
 	};
 

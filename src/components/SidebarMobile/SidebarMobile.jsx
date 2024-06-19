@@ -74,6 +74,7 @@ export default function Sidebar() {
 							src={user.profileImage}
 							alt='Profile'
 							width={50}
+							height={50}
 						/>
 						<div className='flex-column gap-half'>
 							<p>

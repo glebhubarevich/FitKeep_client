@@ -26,7 +26,7 @@ const NewExercise = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (!name || !description || !category) {
+		if (!name || !category) {
 			alert('Please fill out all fields.');
 			return;
 		}
@@ -66,77 +66,78 @@ const NewExercise = () => {
 	return (
 		<div className='page'>
 			<h1>Create New Exercise</h1>
-			<form onSubmit={handleSubmit} className='flex-column gap1'>
-				<div className='flex-row gap1 flex-ai-center'>
-					<label>Name:</label>
-					<input
-						type='text'
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						required
-					/>
-				</div>
-				<div className='flex-row gap1 flex-ai-center'>
-					<label>Description:</label>
-					<textarea
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						required
-					/>
-				</div>
-				<div className='flex-row gap1 flex-ai-center'>
-					<label>Category:</label>
-					<select
-						value={category}
-						onChange={(e) => setCategory(e.target.value)}
-						required
-					>
-						<option value=''>Select a category</option>
-						{categories.map((cat) => (
-							<option key={cat} value={cat}>
-								{cat}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className='flex-row gap1 flex-ai-center'>
-					<label>Media:</label>
-					<button
-						type='button'
-						onClick={handleButtonClick}
-						className='btn btn-secondary'
-					>
-						{media.length > 0
-							? `${media.length} items selected`
-							: 'Choose Files'}
-					</button>
-					<input
-						type='file'
-						multiple
-						onChange={handleMediaChange}
-						ref={fileInputRef}
-						style={{display: 'none'}}
-						accept='image/*'
-					/>
-				</div>
-				<div className='grid gap2'>
-					{media.map((file, index) => (
-						<div
-							key={index}
-							className='media-item'
-							onClick={() => handleRemoveMedia(index)}
+			<div className="section-container">
+				<form onSubmit={handleSubmit} className='flex-column gap1'>
+					<div className='flex-row gap1 flex-ai-center'>
+						<label>Name:</label>
+						<input
+							type='text'
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							required
+						/>
+					</div>
+					<div className='flex-row gap1 flex-ai-center'>
+						<label>Description:</label>
+						<textarea
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+						/>
+					</div>
+					<div className='flex-row gap1 flex-ai-center'>
+						<label>Category:</label>
+						<select
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+							required
 						>
-							<img
-								src={URL.createObjectURL(file)}
-								alt={`preview-${index}`}
-							/>
-						</div>
-					))}
-				</div>
-				<button type='submit' className='btn btn-primary'>
-					Create Exercise
-				</button>
-			</form>
+							<option value=''>Select a category</option>
+							{categories.map((cat) => (
+								<option key={cat} value={cat}>
+									{cat}
+								</option>
+							))}
+						</select>
+					</div>
+					<div className='flex-row gap1 flex-ai-center'>
+						<label>Media:</label>
+						<button
+							type='button'
+							onClick={handleButtonClick}
+							className='btn btn-secondary'
+						>
+							{media.length > 0
+								? `${media.length} items selected`
+								: 'Choose Files'}
+						</button>
+						<input
+							type='file'
+							multiple
+							onChange={handleMediaChange}
+							ref={fileInputRef}
+							style={{display: 'none'}}
+							accept='image/*'
+						/>
+					</div>
+					<div className='grid gap2'>
+						{media.map((file, index) => (
+							<div
+								key={index}
+								className='media-item'
+								onClick={() => handleRemoveMedia(index)}
+							>
+								<img
+									src={URL.createObjectURL(file)}
+									alt={`preview-${index}`}
+								/>
+							</div>
+						))}
+					</div>
+					<button type='submit' className='btn btn-primary'>
+						Create Exercise
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

@@ -83,7 +83,7 @@ button,
 	border-radius: 12px;
 }
 
-input {
+input, textarea, select{
 	border: 1px solid var(--medium-gray);
 	padding: 1rem;
 	border-radius: var(--border-radius);

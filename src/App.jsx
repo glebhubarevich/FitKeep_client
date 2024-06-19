@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Trainings from './pages/Trainings/Trainings';
 import TrainingDetails from './pages/TrainingDetails/TrainingDetails';
 import Exercises from './pages/Exercises';
+import ExerciseDetails from './pages/ExerciseDetails/ExerciseDetails';
 import Sidebar from './components/sidebar/Sidebar';
 import SidebarMobile from './components/SidebarMobile/SidebarMobile';
 import LoginForm from './pages/LoginForm/LoginForm';
@@ -84,7 +85,11 @@ function App() {
 							}
 						/>
 						{/* Exercises */}
-						<Route path='/exercises/:id' element={<div>Exercise</div>} />
+						<Route path='/exercises/:id' element={
+							<ProtectedRoute>
+								<ExerciseDetails />
+							</ProtectedRoute>
+						} />
 						<Route
 							path='/profile'
 							element={

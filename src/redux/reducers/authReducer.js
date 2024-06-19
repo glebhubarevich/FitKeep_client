@@ -16,17 +16,9 @@ export const loadUser = createAsyncThunk('auth/loadUser', async () => {
 export const register = createAsyncThunk('auth/register', async (formData) => {
 	const config = {
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'multipart/form-data',
 		},
 	};
-	formData.profileImage = formData.profileImage
-		? formData.profileImage
-		: `https://api.dicebear.com/8.x/initials/svg?backgroundType=gradientLinear&seed=${formData.name.replace(
-				/ /g,
-				'+'
-		  )}`;
-	// const body = JSON.stringify({name, email, password, profileImage});
-	console.log('body', formData);
 	const response = await axios.post(
 		`${API_URL}/api/auth/register`,
 		formData,

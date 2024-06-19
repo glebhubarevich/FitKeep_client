@@ -22,9 +22,9 @@ export const getExercises = createAsyncThunk(
 
 export const getExercise = createAsyncThunk(
 	'exercises/getExercise',
-	async (exercise) => {
+	async (id) => {
 		const response = await axios
-			.get(`${API_URL}/api/exercises/${exercise._id}`)
+			.get(`${API_URL}/api/exercises/${id}`)
 			.catch((err) => {
 				console.log(err);
 			});

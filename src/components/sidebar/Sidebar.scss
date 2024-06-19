@@ -40,6 +40,9 @@
 			}
 		}
 	}
+	& img {
+		object-fit: cover;
+	}
 	// & .button {
 	// 	margin-left: 2rem;
 	// 	margin-right: 2rem;
