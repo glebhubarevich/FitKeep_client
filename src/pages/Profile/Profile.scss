@@ -1,12 +1,4 @@
 .profile {
-	&__container {
-		background: var(--white);
-		gap: 2rem;
-		margin-top: 3rem;
-		width: 100%;
-		height: 100%;
-		padding: 2rem;
-	}
 	&__image {
 		justify-content: center;
 		align-items: center;
@@ -17,5 +9,31 @@
 			border-radius: 50%;
 			object-fit: cover;
 		}
+	}
+	& h1 {
+		width: 100%;
+		max-width: 600px;
+		text-align: left;
+	}
+	&.page {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+	}
+	& .section-container {
+		max-width: 600px;
+	}
+	&__input {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 5fr;
+		align-items: center;
+	}
+	& button,
+	& .button {
+		width: 100%;
 	}
 }

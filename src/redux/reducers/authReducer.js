@@ -49,6 +49,57 @@ export const login = createAsyncThunk(
 	}
 );
 
+export const updateProfile = createAsyncThunk(
+	'auth/updateProfile',
+	async (formData) => {
+		const config = {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		};
+		const response = await axios.patch(
+			`${API_URL}/api/auth/me`,
+			formData,
+			config
+		);
+		return response.data;
+	}
+);
+
+export const updatePassword = createAsyncThunk(
+	'auth/updatePassword',
+	async (passwordData) => {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		const response = await axios.patch(
+			`${API_URL}/api/auth/me/password`,
+			passwordData,
+			config
+		);
+		return response.data;
+	}
+);
+export const removeImage = createAsyncThunk('auth/removeImage', async () => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};
+	const response = await axios.delete(
+		`${API_URL}/api/auth/me/profileImage`,
+		config
+	);
+	return response.data;
+});
+export const deleteUser = createAsyncThunk('auth/deleteAccount', async () => {
+	await axios.delete(`${API_URL}/api/auth/me`);
+	localStorage.removeItem('token');
+	setAuthToken(null);
+});
+
 export const logout = createAsyncThunk('auth/logout', async () => {
 	localStorage.removeItem('token');
 	setAuthToken(null);
@@ -118,6 +169,51 @@ const authSlice = createSlice({
 				state.isAuthenticated = false;
 				state.loading = false;
 				state.user = null;
+			})
+			.addCase(updateProfile.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(updateProfile.fulfilled, (state, action) => {
+				state.loading = false;
+				state.user = {...state.user, ...action.payload};
+			})
+			.addCase(updateProfile.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			})
+			.addCase(updatePassword.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(updatePassword.fulfilled, (state) => {
+				state.loading = false;
+			})
+			.addCase(updatePassword.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			})
+			.addCase(removeImage.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(removeImage.fulfilled, (state, action) => {
+				state.loading = false;
+				state.user.profileImage = action.payload.profileImage;
+			})
+			.addCase(removeImage.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			})
+			.addCase(deleteUser.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(deleteUser.fulfilled, (state) => {
+				state.token = null;
+				state.isAuthenticated = false;
+				state.loading = false;
+				state.user = null;
+			})
+			.addCase(deleteUser.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
 			});
 	},
 });

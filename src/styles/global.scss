@@ -38,10 +38,13 @@ button,
 	cursor: pointer;
 	transition: all 0.2s ease;
 	height: fit-content;
-	&:not(.active):not(.primary):hover {
+	text-wrap: nowrap;
+	&:not(.active):not(.primary):not(.controls__period-selector_btn):hover {
 		background-color: var(--medium-gray);
 		color: var(--white);
 		transition: all 0.2s ease;
+		transform: translateY(-2px);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 	}
 	&.btn_primary {
 		background-color: var(--primary);
@@ -83,11 +86,24 @@ button,
 	border-radius: 12px;
 }
 
-input, textarea, select{
+input,
+textarea,
+select {
 	border: 1px solid var(--medium-gray);
 	padding: 1rem;
 	border-radius: var(--border-radius);
 }
 main {
 	width: 100vw !important;
+}
+
+.danger-zone {
+	background-color: var(--primary-light);
+	padding: 1rem;
+	color: var(--primary);
+	border-radius: var(--border-radius);
+	& .btn_danger {
+		background-color: var(--primary);
+		color: var(--white);
+	}
 }

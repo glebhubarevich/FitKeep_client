@@ -5,7 +5,10 @@ const ExerciseCard = ({exercise, isSelected, onSelect}) => {
 	const navigate = useNavigate();
 	const handleSelect = () => {
 		if (onSelect) onSelect(exercise._id);
-		else navigate('/exercises/' + exercise._id);
+		else {
+			console.log('exercise', exercise);
+			navigate('/exercises/' + exercise._id);
+		}
 	};
 
 	return (

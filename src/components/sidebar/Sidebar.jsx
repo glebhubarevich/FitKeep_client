@@ -40,15 +40,28 @@ export default function Sidebar() {
 			</div>
 			<div className='flex-column p2'>
 				<div className='flex-row mb1 gap1 flex-ai-center'>
-					<img className='rounded-circle' src={user.profileImage} alt='Profile' width={50} height={50} />
-					<div className='flex-column gap-half'>
-						<p>
-							<strong>Logged in as:</strong>
-						</p>
-						<p>{user.name}</p>
-					</div>
+					<Link to='/profile'>
+						<img
+							className='rounded-circle'
+							src={user.profileImage}
+							alt='Profile'
+							width={50}
+							height={50}
+						/>
+					</Link>
+					<Link to='/profile'>
+						<div className='flex-column gap-half'>
+							<p>
+								<strong>Logged in as:</strong>
+							</p>
+							<p>{user.name}</p>
+						</div>
+					</Link>
 				</div>
-				<button className='button btn__logout' onClick={() => dispatch(logout())}>
+				<button
+					className='button btn__logout'
+					onClick={() => dispatch(logout())}
+				>
 					Logout
 				</button>
 			</div>
