@@ -1,3 +1,5 @@
+// Komponente für die Darstellung eines einzelnen Übungskarten-Elements
+
 import './ExerciseCard.scss';
 import {useNavigate} from 'react-router-dom';
 
@@ -6,8 +8,8 @@ const ExerciseCard = ({exercise, isSelected, onSelect}) => {
 	const handleSelect = () => {
 		if (onSelect) onSelect(exercise._id);
 		else {
-			console.log('exercise', exercise);
-			navigate('/exercises/' + exercise._id);
+			console.log(exercise._id);
+			navigate(`/exercises/${exercise._id}`);
 		}
 	};
 

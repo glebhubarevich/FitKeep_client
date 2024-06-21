@@ -28,6 +28,7 @@ export const getExercise = createAsyncThunk(
 			.catch((err) => {
 				console.log(err);
 			});
+
 		return response.data;
 	}
 );

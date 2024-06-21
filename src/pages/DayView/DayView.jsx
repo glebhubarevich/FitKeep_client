@@ -25,6 +25,7 @@ export default function DayView() {
 	if (error) {
 		return <p>Error: {error}</p>;
 	}
+	console.log('trainings', trainings);
 
 	return (
 		<div className='page'>

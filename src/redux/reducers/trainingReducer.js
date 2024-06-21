@@ -7,8 +7,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const getTrainings = createAsyncThunk(
 	'trainings/getTrainings',
 	async () => {
-		const response = await axios.get(`${API_URL}/api/trainings`);
-		return response.data;
+		try {
+			const response = await axios.get(`${API_URL}/api/trainings`);
+			return response.data;
+		} catch (error) {
+			return [];
+		}
 	}
 );
 
@@ -23,8 +27,14 @@ export const getTraining = createAsyncThunk(
 export const getTrainingsByDate = createAsyncThunk(
 	'trainings/getTrainingsByDate',
 	async (date) => {
-		const response = await axios.get(`${API_URL}/api/trainings/date/${date}`);
-		return response.data;
+		try {
+			const response = await axios.get(
+				`${API_URL}/api/trainings/date/${date}`
+			);
+			return response.data;
+		} catch (error) {
+			return [];
+		}
 	}
 );
 

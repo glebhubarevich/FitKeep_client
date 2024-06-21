@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigate, Link} from 'react-router-dom';
 import {register} from '../../redux/reducers/authReducer';

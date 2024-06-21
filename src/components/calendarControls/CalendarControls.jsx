@@ -1,3 +1,5 @@
+//Hilfskomponente für die Steuerung des Kalenders
+
 import './CalendarControls.scss';
 import {ArrowLeft, ArrowRight} from 'phosphor-react';
 

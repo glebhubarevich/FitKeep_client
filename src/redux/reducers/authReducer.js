@@ -6,7 +6,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const loadUser = createAsyncThunk('auth/loadUser', async () => {
 	if (localStorage.token) {
-		console.log('localStorage.token', localStorage.token);
 		setAuthToken(localStorage.token);
 	}
 	const response = await axios.get(`${API_URL}/api/users/me`);
@@ -58,7 +57,7 @@ export const updateProfile = createAsyncThunk(
 			},
 		};
 		const response = await axios.patch(
-			`${API_URL}/api/auth/me`,
+			`${API_URL}/api/users/me`,
 			formData,
 			config
 		);
@@ -75,7 +74,7 @@ export const updatePassword = createAsyncThunk(
 			},
 		};
 		const response = await axios.patch(
-			`${API_URL}/api/auth/me/password`,
+			`${API_URL}/api/users/me/password`,
 			passwordData,
 			config
 		);
@@ -89,13 +88,14 @@ export const removeImage = createAsyncThunk('auth/removeImage', async () => {
 		},
 	};
 	const response = await axios.delete(
-		`${API_URL}/api/auth/me/profileImage`,
+		`${API_URL}/api/users/me/profileImage`,
 		config
 	);
 	return response.data;
 });
+
 export const deleteUser = createAsyncThunk('auth/deleteAccount', async () => {
-	await axios.delete(`${API_URL}/api/auth/me`);
+	await axios.delete(`${API_URL}/api/users/me`);
 	localStorage.removeItem('token');
 	setAuthToken(null);
 });

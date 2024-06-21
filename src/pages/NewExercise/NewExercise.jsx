@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {addExercise} from '../../redux/reducers/exerciseReducer';
@@ -66,7 +66,7 @@ const NewExercise = () => {
 	return (
 		<div className='page'>
 			<h1>Create New Exercise</h1>
-			<div className="section-container">
+			<div className='section-container'>
 				<form onSubmit={handleSubmit} className='flex-column gap1'>
 					<div className='flex-row gap1 flex-ai-center'>
 						<label>Name:</label>
@@ -133,7 +133,7 @@ const NewExercise = () => {
 							</div>
 						))}
 					</div>
-					<button type='submit' className='btn btn-primary'>
+					<button type='submit' className='btn_primary'>
 						Create Exercise
 					</button>
 				</form>

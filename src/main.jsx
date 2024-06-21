@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
@@ -12,6 +11,7 @@ import {Provider} from 'react-redux';
 import store from './redux/state/store.js';
 import {loadUser} from './redux/reducers/authReducer.js';
 
+//Laden der Benutzerdaten, wenn ein Token im Local Storage vorhanden ist
 if (localStorage.token) {
 	store.dispatch(loadUser());
 }

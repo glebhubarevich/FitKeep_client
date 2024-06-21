@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import Home from './pages/Home';
@@ -85,11 +85,14 @@ function App() {
 							}
 						/>
 						{/* Exercises */}
-						<Route path='/exercises/:id' element={
-							<ProtectedRoute>
-								<ExerciseDetails />
-							</ProtectedRoute>
-						} />
+						<Route
+							path='/exercises/:id'
+							element={
+								<ProtectedRoute>
+									<ExerciseDetails />
+								</ProtectedRoute>
+							}
+						/>
 						<Route
 							path='/profile'
 							element={
